@@ -1,18 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_task/models/task.dart';
+import 'package:to_do_task/screens/homepage.dart';
 
 class AddEditTaskScreen extends StatefulWidget {
   final Task? task;
 
-  AddEditTaskScreen({this.task});
+  const AddEditTaskScreen({this.task});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddEditTaskScreenState createState() => _AddEditTaskScreenState();
 }
 
 class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
+  //final String Function(DateTime) _formatDateTime;
+
   DateTime? _startTime;
   DateTime? _endTime;
 
@@ -67,7 +74,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Task Name'),
+                decoration: const InputDecoration(labelText: 'Task Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a task name';
@@ -75,7 +82,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -85,7 +92,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                           onPressed: () => _pickDateTime(true),
                           child: Text(_startTime == null
                               ? 'Pick Start Time'
-                              : 'Start: $_startTime'),
+                              : 'Start: ${_startTime!}'),
                         ),
                       ],
                     ),
