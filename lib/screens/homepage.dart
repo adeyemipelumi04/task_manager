@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:to_do_task/models/task.dart';
 import 'package:to_do_task/screens/add_edit_page.dart';
+
+import '../widgets/task_card.dart';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -72,27 +73,11 @@ class _TaskPageState extends State<TaskPage> {
                 itemCount: tasks.length,
                 itemBuilder: (context, index) {
                   final task = tasks[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(task.name),
-                      subtitle: Text(
-                        'Start: ${DateFormat('yyyy-MM-dd hh:mma').format(task.startTime)}\nEnd: ${DateFormat('yyyy-MM-dd hh:mma').format(task.endTime)}',
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () =>
-                                _addOrEditTask(task: task, index: index),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => _deleteTask(index),
-                          ),
-                        ],
-                      ),
-                    ),
+                  return TaskCardWidget(
+                    task: task,
+                    index: index,
+                    onAddOrEditTask: _addOrEditTask,
+                    onDeleteTask: _deleteTask,
                   );
                 },
               ),
