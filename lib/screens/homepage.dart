@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_task/models/task.dart';
 import 'package:to_do_task/screens/add_edit_page.dart';
 
@@ -75,7 +76,8 @@ class _TaskPageState extends State<TaskPage> {
                     child: ListTile(
                       title: Text(task.name),
                       subtitle: Text(
-                          'Start: ${task.startTime}\nEnd: ${task.endTime}'),
+                        'Start: ${DateFormat('yyyy-MM-dd hh:mma').format(task.startTime)}\nEnd: ${DateFormat('yyyy-MM-dd hh:mma').format(task.endTime)}',
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
