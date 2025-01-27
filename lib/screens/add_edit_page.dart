@@ -25,11 +25,19 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
   }
 
   void _pickDateTime(bool isStart) async {
+    if (!isStart && _startTime == null) {
+      const snackBar = SnackBar(
+        content: Text('Please pick start time first'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }
+
     final now = DateTime.now();
     final date = await showDatePicker(
       context: context,
       initialDate: now,
-      firstDate: DateTime(2000),
+      firstDate: isStart ? DateTime(2000) : _startTime!,
       lastDate: DateTime(2100),
     );
 
