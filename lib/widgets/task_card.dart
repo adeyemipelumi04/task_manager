@@ -79,14 +79,14 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               onPressed: () => widget.onAddOrEditTask(
                 task: widget.task,
                 index: widget.index,
               ),
             ),
             IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () => widget.onDeleteTask(widget.index),
             ),
           ],

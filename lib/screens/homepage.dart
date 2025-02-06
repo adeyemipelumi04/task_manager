@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:to_do_task/data/database.dart';
 import 'package:to_do_task/models/task.dart';
 import 'package:to_do_task/screens/add_edit_page.dart';
 
@@ -12,7 +14,24 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   List<Task> tasks = [];
 
+  
+  @override
+  void initState() {
+    loadTask();
+    super.initState();
+  
+  }
+
+  void loadTask()async{
+    tasks= await TaskDatabase.loadData();
+    setState(() {
+      
+    });
+  }
+
   void _addOrEditTask({Task? task, int? index}) async {
+    
+    
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -21,12 +40,14 @@ class _TaskPageState extends State<TaskPage> {
     );
 
     if (result != null && result is Task) {
-      setState(() {
-        if (index != null) {
+      if (index != null) {
           tasks[index] = result;
         } else {
           tasks.add(result);
         }
+        TaskDatabase.updateDataBase(tasks);
+      setState(() {
+        
       });
     }
   }
@@ -44,9 +65,11 @@ class _TaskPageState extends State<TaskPage> {
           ),
           TextButton(
             onPressed: () {
+              
+              tasks.removeAt(index);
+              TaskDatabase.updateDataBase(tasks);
               setState(() {
-                tasks.removeAt(index);
-              });
+                              });
               Navigator.pop(context);
             },
             child: const Text('Delete', style: TextStyle(color: Colors.red)),
@@ -86,6 +109,6 @@ class _TaskPageState extends State<TaskPage> {
         onPressed: () => _addOrEditTask(),
         child: Icon(Icons.add),
       ),
-    );
-  }
+);
+}
 }
