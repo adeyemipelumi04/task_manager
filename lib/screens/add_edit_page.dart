@@ -4,7 +4,7 @@ import 'package:to_do_task/models/task.dart';
 class AddEditTaskScreen extends StatefulWidget {
   final Task? task;
 
-  AddEditTaskScreen({this.task});
+  const AddEditTaskScreen({super.key, this.task});
 
   @override
   _AddEditTaskScreenState createState() => _AddEditTaskScreenState();
@@ -75,7 +75,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Task Name'),
+                decoration: const InputDecoration(labelText: 'Task Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a task name';
@@ -83,7 +83,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -112,7 +112,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate() &&
@@ -128,7 +128,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                     );
                   }
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
             ],
           ),
